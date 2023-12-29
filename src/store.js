@@ -1,5 +1,4 @@
 import {reactive} from 'vue'
-import HomeView from "@/views/AccueilView.vue";
 
 export const store = reactive({
     routes: [
