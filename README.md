@@ -27,3 +27,9 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Deploy on Github Pages (push master before?)
+see https://www.youtube.com/watch?v=yo2bMGnIKE8
+```sh
+git subtree push --prefix dist origin gh-pages
+```

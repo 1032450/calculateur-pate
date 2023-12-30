@@ -1,0 +1,8 @@
+.ingredient {
+    font-size: 25px;
+    font-weight: bold;
+    margin-inline: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

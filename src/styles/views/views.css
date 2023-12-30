@@ -1,0 +1,69 @@
+input {
+    width: 100px;
+    margin-block: 5px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 7px;
+    text-align: center;
+    background: white;
+}
+
+hr {
+    border-style: solid
+}
+
+.titre {
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+.grosse-ligne {
+    border-width: 3px;
+}
+
+.grosse-ligne-point {
+    border-width: 2px;
+    border-style: dashed;
+}
+
+.pain {
+    background: lightblue
+}
+
+.olive {
+    background: lightgrey
+}
+
+.tomate {
+    background: lightpink
+}
+
+.poids-total {
+    background: lightgoldenrodyellow
+}
+
+.recette {
+    background: lightgreen
+}
+
+.texte {
+    font-size: 25px;
+    font-weight: bold;
+    margin-inline: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.texte-centre {
+    font-size: 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: black;
+}
+

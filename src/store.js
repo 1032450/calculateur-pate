@@ -23,7 +23,7 @@ export const store = reactive({
             component: () => import('./views/BleView.vue')
         },
         {
-            path: "/",
+            path: "/italienne",
             name: "Italienne",
             component: () => import('./views/IntalienneView.vue')
         },

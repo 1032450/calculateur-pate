@@ -1,20 +1,49 @@
 <template>
   <div class="pain-input">
-    <span>{{props.nom}}</span>
+    <span>{{ props.nom }}</span>
     <input class="qte"
-        type="number"
-        v-model="nombre"
-        @keyup="calculer"
+           type="number"
+           v-model="nombre"
+           @keyup="calculer"
     />
   </div>
+  
+  <UnIngredientDisplay
+      v-if="props.nbIngredient === 1"
+      :key="nombre"
+      :nomIngredient="props.ingredient1.nom"
+      :qteIngredient="props.ingredient1.qte"
+      :poids="props.poids"
+      :nombre="nombre"
+  />
+  
+  <DeuxIngredientDisplay
+      v-if="props.nbIngredient === 2"
+      :key="nombre"
+      :nomIngredient1="props.ingredient1.nom"
+      :qteIngredient1="props.ingredient1.qte"
+      :nomIngredient2="props.ingredient2.nom"
+      :qteIngredient2="props.ingredient2.qte"
+      :poids="props.poids"
+      :nombre="nombre"
+  />
 
 </template>
 
 <script setup>
 
 import {ref} from "vue";
+import UnIngredientDisplay from "@/components/UnIngredientDisplay.vue";
+import DeuxIngredientDisplay from "@/components/DeuxIngredientDisplay.vue";
 
-const props = defineProps(["nom", "poids"]);
+const props = defineProps([
+  "nom",
+  "poids",
+  "grains",
+  "nbIngredient",
+  "ingredient1",
+  "ingredient2",
+]);
 
 const nombre = ref("");
 
@@ -31,7 +60,7 @@ function calculer() {
 .pain-input {
   font-size: 25px;
   font-weight: bold;
-  margin-inline: 30px;
+  margin-inline: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,6 +74,7 @@ function calculer() {
   border-style: solid;
   border-radius: 7px;
   text-align: center;
+  background: white;
 }
 
 </style>
