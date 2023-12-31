@@ -1,11 +1,20 @@
 <template>
-  <div class="pain-input">
+  <div class="pain">
     <span>{{ props.nom }}</span>
-    <input class="qte"
-           type="number"
-           v-model="nombre"
-           @keyup="calculer"
-    />
+    <span class="input">
+      <button
+          v-if="nombre !== ''"
+          class="button"
+          @click="effacer"
+      >
+        X
+      </button>
+      <input class="qte"
+             type="number"
+             v-model="nombre"
+             @keyup="calculer"
+      />
+    </span>
   </div>
   
   <UnIngredientDisplay
@@ -54,16 +63,44 @@ function calculer() {
   emit("calculer", props.nom, total);
 }
 
+function effacer() {
+  if (nombre.value !== "") {
+    nombre.value = ""
+    calculer()
+  }
+}
+
 </script>
 
 <style scoped>
-.pain-input {
+.pain {
   font-size: 25px;
   font-weight: bold;
   margin-inline: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+}
+
+.button:active {
+  background-color: red;
+  color: white;
+}
+
+.button {
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 1px;
+  font-size: 20px;
+  margin-inline: 10px;
+  width: 32px;
+  background-color: white;
 }
 
 .qte {

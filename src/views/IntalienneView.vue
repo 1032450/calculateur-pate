@@ -26,32 +26,42 @@
       
       <div class="texte">
         <span>Avec olive</span>
-        <span>{{ state.poidsOlive }}</span>
+        <span>{{ state.poidsOlive || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans olive</span>
-        <span>{{ state.poidsOliveSansOlive }}</span>
+        <span>{{ state.poidsOliveSansOlive || ""  }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
       
       <div class="texte">
         <span>Poids voulu</span>
-        <input
-            type="number"
-            v-model="poidsOliveVoulu"
-            @keyup="calculerPateOlive"
-        />
+        <span class="input">
+          <button
+              v-if="poidsOliveVoulu !== ''"
+              class="button"
+              @click="effacerOlive"
+          >
+            X
+          </button>
+          <input
+              class="qte"
+              type="number"
+              v-model="poidsOliveVoulu"
+              @keyup="calculerPateOlive"
+          />
+        </span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Qte olive</span>
-        <span>{{ state.olive }}</span>
+        <span>{{ state.olive || ""  }}</span>
       </div>
       
     </div>
@@ -64,32 +74,42 @@
       
       <div class="texte">
         <span>Avec tomate</span>
-        <span>{{ state.poidsTomate }}</span>
+        <span>{{ state.poidsTomate || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans tomate</span>
-        <span>{{ state.poidsTomateSansTomate }}</span>
+        <span>{{ state.poidsTomateSansTomate || ""  }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
       
       <div class="texte">
         <span>Poids voulu</span>
-        <input
-            type="number"
-            v-model="poidsTomateVoulu"
-            @keyup="calculerPateTomate"
-        />
+        <span class="input">
+          <button
+              v-if="poidsTomateVoulu !== ''"
+              class="button"
+              @click="effacerTomate"
+          >
+            X
+          </button>
+          <input
+              class="qte"
+              type="number"
+              v-model="poidsTomateVoulu"
+              @keyup="calculerPateTomate"
+          />
+        </span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Qte tomate</span>
-        <span>{{ state.tomate }}</span>
+        <span>{{ state.tomate || ""  }}</span>
       </div>
       
     </div>
@@ -102,25 +122,34 @@
       
       <div class="texte">
         <span>Avec eau</span>
-        <span>{{ state.poidsTotalAvecEau }}</span>
+        <span>{{ state.poidsTotalAvecEau || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans eau</span>
-        <span>{{ state.poidsTotalSansEau }}</span>
+        <span>{{ state.poidsTotalSansEau  || ""  }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
       
       <div class="texte">
         <span>Poids voulu</span>
-        <input
-            type="number"
-            v-model="poidsVoulu"
-            @keyup="calculerPateVoulu"
-        />
+        <span class="input">
+          <button
+              v-if="poidsVoulu !== ''"
+              class="button"
+              @click="effacer"
+          >
+            X
+          </button>
+          <input class="qte"
+                 type="number"
+                 v-model="poidsVoulu"
+                 @keyup="calculerPateVoulu"
+          />
+        </span>
       </div>
       
     </div>
@@ -134,49 +163,42 @@
       
       <div class="texte">
         <span>Blanche</span>
-        <span>{{ state.blanche }}</span>
+        <span>{{ state.blanche || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Seigle</span>
-        <span>{{ state.seigle }}</span>
+        <span>{{ state.seigle || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Eau</span>
-        <span>{{ state.eau }}</span>
+        <span>{{ state.eau || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Huile</span>
-        <span>{{ state.huile }}</span>
+        <span>{{ state.huile || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sel</span>
-        <span>{{ state.sel }}</span>
+        <span>{{ state.sel || ""  }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Levure</span>
-        <span>{{ state.levure }}</span>
-      </div>
-      
-      <hr/>
-      
-      <div class="texte">
-        <span>Pâte Fermentée</span>
-        <span>{{ state.pateFermentee }}</span>
+        <span>{{ state.levure || ""  }}</span>
       </div>
       
     </div>
@@ -205,8 +227,8 @@ const pains = [
   {nom: "Pizza Olive", poids: 250, total: 0},
   {nom: "Pizza Tomate", poids: 250, total: 0},
   {nom: "Pizza Saumon", poids: 200, total: 0},
-  {nom: "Empereur Jambon", poids: 150, total: 0},
-  {nom: "Empereur Tomate", poids: 150, total: 0},
+  {nom: "Emp. Jambon", poids: 150, total: 0},
+  {nom: "Emp. Tomate", poids: 150, total: 0},
   {nom: "Hamburger", poids: 75, total: 0},
   {nom: "Sous-marin", poids: 75, total: 0},
 ]
@@ -219,7 +241,6 @@ const seigle = 0.1
 const huile = 0.05
 const sel = 0.02
 const levure = 0.006
-const pateFermentee = 0.15
 
 const state = reactive({
   poidsPartielAvecEau: 0,
@@ -237,7 +258,6 @@ const state = reactive({
   huile: 0,
   sel: 0,
   levure: 0,
-  pateFermentee: 0,
 })
 
 function calculer(nom, total) {
@@ -267,15 +287,36 @@ function calculerPateOlive() {
   calculerPate()
 }
 
+function effacerOlive() {
+  if (poidsOliveVoulu.value !== "") {
+    poidsOliveVoulu.value = ""
+    calculerPateOlive()
+  }
+}
+
 function calculerPateTomate() {
   state.tomate = state.poidsTomate - poidsTomateVoulu.value
   calculerPate()
+}
+
+function effacerTomate() {
+  if (poidsTomateVoulu.value !== "") {
+    poidsTomateVoulu.value = ""
+    calculerPateTomate()
+  }
 }
 
 function calculerPate() {
   state.poidsTotalAvecEau = state.poidsPartielAvecEau + Number(poidsOliveVoulu.value) + Number(poidsTomateVoulu.value)
   state.poidsTotalAvecEau = Math.round(state.poidsTotalAvecEau)
   state.poidsTotalSansEau = Math.round(state.poidsTotalAvecEau / (1 + humidite))
+}
+
+function effacer() {
+  if (poidsVoulu.value !== "") {
+    poidsVoulu.value = ""
+    calculerPate()
+  }
 }
 
 function calculerPateVoulu() {
@@ -285,7 +326,6 @@ function calculerPateVoulu() {
   state.huile = Math.round(poidsVoulu.value * huile)
   state.sel = Math.round(poidsVoulu.value * sel)
   state.levure = Math.round(poidsVoulu.value * levure)
-  state.pateFermentee = Math.round(poidsVoulu.value * pateFermentee)
 }
 
 </script>

@@ -28,6 +28,27 @@ hr {
     border-style: dashed;
 }
 
+.input {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    border-style: solid;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 1px;
+    font-size: 20px;
+    margin-inline: 10px;
+    width: 32px;
+    background-color: white;
+}
+
+.button:active {
+    background-color: red;
+    color: white;
+}
+
 .pain {
     background: lightblue
 }

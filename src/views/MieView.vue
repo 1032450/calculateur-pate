@@ -29,26 +29,34 @@
       
       <div class="texte">
         <span>Avec eau</span>
-        <span>{{ state.poidsTotalAvecEau }}</span>
+        <span>{{ state.poidsTotalAvecEau || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans eau</span>
-        <span>{{ state.poidsTotalSansEau }}</span>
+        <span>{{ state.poidsTotalSansEau || "" }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
       
       <div class="texte">
         <span>Poids voulu</span>
-        <input
-            class="poids-voulu"
-            type="number"
-            v-model="poidsVoulu"
-            @keyup="calculerPate"
-        />
+        <span class="input">
+          <button
+              v-if="poidsVoulu !== ''"
+              class="button"
+              @click="effacer"
+          >
+            X
+          </button>
+          <input class="qte"
+                 type="number"
+                 v-model="poidsVoulu"
+                 @keyup="calculerPate"
+          />
+        </span>
       </div>
     
     </div>
@@ -61,49 +69,49 @@
       
       <div class="texte">
         <span>Blanche</span>
-        <span>{{ state.blanche }}</span>
+        <span>{{ state.blanche || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Eau</span>
-        <span>{{ state.eau }}</span>
+        <span>{{ state.eau || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Lait</span>
-        <span>{{ state.lait }}</span>
+        <span>{{ state.lait || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Beurre</span>
-        <span>{{ state.beurre }}</span>
+        <span>{{ state.beurre || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Miel</span>
-        <span>{{ state.miel }}</span>
+        <span>{{ state.miel || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sel</span>
-        <span>{{ state.sel }}</span>
+        <span>{{ state.sel || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Levure</span>
-        <span>{{ state.levure }}</span>
+        <span>{{ state.levure || "" }}</span>
       </div>
     
     </div>
@@ -178,6 +186,13 @@ function calculer(nom, total) {
   
   state.poidsTotalAvecEau = Math.round(state.poidsTotalAvecEau)
   state.poidsTotalSansEau = Math.round(state.poidsTotalAvecEau / (1 + humiditeAvant))
+}
+
+function effacer() {
+  if (poidsVoulu.value !== "") {
+    poidsVoulu.value = ""
+    calculerPate()
+  }
 }
 
 function calculerPate() {
