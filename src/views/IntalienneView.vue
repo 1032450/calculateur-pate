@@ -15,7 +15,7 @@
             @calculer="calculer"
         />
       </div>
-      
+    
     </div>
     
     <div class="olive">
@@ -26,14 +26,14 @@
       
       <div class="texte">
         <span>Avec olive</span>
-        <span>{{ state.poidsOlive || ""  }}</span>
+        <span>{{ state.poidsOlive || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans olive</span>
-        <span>{{ state.poidsOliveSansOlive || ""  }}</span>
+        <span>{{ state.poidsOliveSansOlive || "" }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
@@ -61,9 +61,11 @@
       
       <div class="texte">
         <span>Qte olive</span>
-        <span>{{ state.olive || ""  }}</span>
+        <span v-if="state.poidsOlive">
+          {{ state.olive || "" }}
+        </span>
       </div>
-      
+    
     </div>
     
     <div class="tomate">
@@ -74,14 +76,14 @@
       
       <div class="texte">
         <span>Avec tomate</span>
-        <span>{{ state.poidsTomate || ""  }}</span>
+        <span>{{ state.poidsTomate || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans tomate</span>
-        <span>{{ state.poidsTomateSansTomate || ""  }}</span>
+        <span>{{ state.poidsTomateSansTomate || "" }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
@@ -109,9 +111,11 @@
       
       <div class="texte">
         <span>Qte tomate</span>
-        <span>{{ state.tomate || ""  }}</span>
+        <span v-if="state.poidsTomate">
+          {{ state.tomate || "" }}
+        </span>
       </div>
-      
+    
     </div>
     
     <div class="poids-total">
@@ -122,14 +126,14 @@
       
       <div class="texte">
         <span>Avec eau</span>
-        <span>{{ state.poidsTotalAvecEau || ""  }}</span>
+        <span>{{ state.poidsTotalAvecEau || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sans eau</span>
-        <span>{{ state.poidsTotalSansEau  || ""  }}</span>
+        <span>{{ state.poidsTotalSansEau || "" }}</span>
       </div>
       
       <hr class="grosse-ligne-point"/>
@@ -151,7 +155,7 @@
           />
         </span>
       </div>
-      
+    
     </div>
     
     <div class="recette">
@@ -163,14 +167,14 @@
       
       <div class="texte">
         <span>Blanche</span>
-        <span>{{ state.blanche || ""  }}</span>
+        <span>{{ state.blanche || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Seigle</span>
-        <span>{{ state.seigle || ""  }}</span>
+        <span>{{ state.seigle || "" }}</span>
       </div>
       
       <hr/>
@@ -184,27 +188,27 @@
       
       <div class="texte">
         <span>Huile</span>
-        <span>{{ state.huile || ""  }}</span>
+        <span>{{ state.huile || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Sel</span>
-        <span>{{ state.sel || ""  }}</span>
+        <span>{{ state.sel || "" }}</span>
       </div>
       
       <hr/>
       
       <div class="texte">
         <span>Levure</span>
-        <span>{{ state.levure || ""  }}</span>
+        <span>{{ state.levure || "" }}</span>
       </div>
-      
-    </div>
-  
-    <hr>
     
+    </div>
+    
+    <hr>
+  
   </div>
 </template>
 
@@ -270,7 +274,7 @@ function calculer(nom, total) {
     }
     if (pains[i].nom === "Olive" || pains[i].nom === "Pizza Olive") {
       state.poidsOlive += pains[i].total
-    } else if (pains[i].nom === "Tomate" || pains[i].nom === "Pizza Tomate" || pains[i].nom === "Empereur Tomate") {
+    } else if (pains[i].nom === "Tomate" || pains[i].nom === "Pizza Tomate" || pains[i].nom === "Emp. Tomate") {
       state.poidsTomate += pains[i].total
     } else {
       state.poidsPartielAvecEau += pains[i].total
@@ -279,30 +283,37 @@ function calculer(nom, total) {
   
   state.poidsOliveSansOlive = Math.round(state.poidsOlive / (1 + olive))
   state.poidsTomateSansTomate = Math.round(state.poidsTomate / (1 + tomate))
-  calculerPate()
+  calculerPateOlive()
+  calculerPateTomate()
 }
 
 function calculerPateOlive() {
-  state.olive = state.poidsOlive - poidsOliveVoulu.value
-  calculerPate()
+  if(poidsOliveVoulu.value) {
+    state.olive = state.poidsOlive - poidsOliveVoulu.value
+    calculerPate()
+  }
 }
 
 function effacerOlive() {
   if (poidsOliveVoulu.value !== "") {
     poidsOliveVoulu.value = ""
-    calculerPateOlive()
+    state.olive = 0
+    calculerPate()
   }
 }
 
 function calculerPateTomate() {
-  state.tomate = state.poidsTomate - poidsTomateVoulu.value
-  calculerPate()
+  if(poidsTomateVoulu.value) {
+    state.tomate = state.poidsTomate - poidsTomateVoulu.value
+    calculerPate()
+  }
 }
 
 function effacerTomate() {
   if (poidsTomateVoulu.value !== "") {
     poidsTomateVoulu.value = ""
-    calculerPateTomate()
+    state.tomate = 0
+    calculerPate()
   }
 }
 

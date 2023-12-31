@@ -23,13 +23,15 @@ npm run dev
 ```
 
 ### Compile and Minify for Production
+After build, in dist/assets, duplicate index.html and rename the copy as 404.html (fixes routing bug)
 
 ```sh
 npm run build
 ```
 
 ### Deploy on Github Pages (push master before?)
-see https://www.youtube.com/watch?v=yo2bMGnIKE8
+See https://www.youtube.com/watch?v=yo2bMGnIKE8
+
 ```sh
 git subtree push --prefix dist origin gh-pages
 ```
