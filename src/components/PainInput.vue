@@ -3,6 +3,7 @@
     <span>{{ props.nom }}</span>
     <span class="input">
       <button
+          type="button"
           v-if="nombre !== ''"
           class="button"
           @click="effacer"

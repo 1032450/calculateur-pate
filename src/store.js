@@ -8,34 +8,39 @@ export const store = reactive({
             component: () => import('./views/AccueilView.vue')
         },
         {
-            path: "/ancienne",
+            path: "/_ancienne",
             name: "Ancienne",
             component: () => import('./views/AncienneView.vue')
         },
         {
-            path: "/blanche",
+            path: "/_blanche",
             name: "Blanche",
             component: () => import('./views/BlancheView.vue')
         },
         {
-            path: "/ble",
+            path: "/_ble",
             name: "Blé",
             component: () => import('./views/BleView.vue')
         },
         {
-            path: "/italienne",
+            path: "/_italienne",
             name: "Italienne",
             component: () => import('./views/IntalienneView.vue')
         },
         {
-            path: "/integral",
+            path: "/_integral",
             name: "Intégral",
             component: () => import('./views/IntegralView.vue')
         },
         {
-            path: "/mie",
+            path: "/_mie",
             name: "Mie",
             component: () => import('./views/MieView.vue')
         },
+        {
+            path: "/:pate",
+            name: "Pate",
+            component: () => import ('./views/CalculateurPate.vue')
+        }
     ]
 })

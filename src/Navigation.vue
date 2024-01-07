@@ -31,7 +31,7 @@
       >
         <v-list-item
             class="v-list-item"
-            v-for="(route, index) in store.routes"
+            v-for="(pate, index) in state.pates"
             :key="index"
             :value="index"
             :border="true"
@@ -42,9 +42,9 @@
               background: white;
             "
         >
-          <RouterLink :to="route.path">
+          <RouterLink :to="{ path: `/${pate.path}` }">
             <v-list-item-title class="v-list-item-title">
-              {{ route.name }}
+              {{ pate.nom }}
             </v-list-item-title>
           </RouterLink>
         </v-list-item>
@@ -55,15 +55,24 @@
 
 
 <script setup>
-import {store} from "./store.js";
+import {onBeforeMount, reactive} from "vue";
+import {getPates} from "@/server/server.js";
 
+onBeforeMount(async () => {
+  state.pates = (await getPates())
+  state.pates.unshift({nom: "Accueil", path: "/"})
+})
+
+const state = reactive({
+  pates: [],
+})
 
 </script>
 
 
 <style scoped>
 
-.v-list-item{
+.v-list-item {
   height: 50px;
   margin: 5px;
   background: white;
